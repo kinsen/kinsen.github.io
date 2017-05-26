@@ -75,7 +75,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="人生," />
+  <meta name="keywords" content="MSSQL,RDS," />
 
 
 
@@ -91,25 +91,76 @@
 
 
 
-<meta name="description" content="人，似乎真的是越缺少什么，就越在乎什么。
-我曾经以为，自己能遗世独立，看破这种凡尘破事，世人皆醉我独醒，然而却不自觉的发现自己竟然也是其中的一份子。越缺少什么，就越想证明自己可以拥有。以自欺欺人的心态，我也可以拥有，只是我现在还不想、用不上等等。与人交谈时，放松心态，越是轻松自然，就越能对答如流，行云流水。
+<meta name="description" content="将MSSQL迁移到亚马逊RDS，步骤以下。
 
-腰有十文必振衣作响每与人言必谈贵戚遇美人必急索登床见问路之人必作傲睨之态与朋友聚喋喋高吟">
+
+备份MSSQL数据库到bak文件
+创建S3数据桶，并上传bak文件
+RDS创建选项组
+创建RDS实例
+连接RDS并还原
+
+
+创建S3数据桶
+
+RDS创建选项组
+
+选项选择 SQLSERVER_BACKUP_RESTORE ，IAM角色如果之前已创建，可以使用。否则选择创建新角色，S3数据桶选择第一步创建的那个数据桶。
+
+创建RDS实例我这里选择的是M">
 <meta property="og:type" content="article">
-<meta property="og:title" content="20170521">
-<meta property="og:url" content="http://yoursite.com/2017/05/21/20170521/index.html">
+<meta property="og:title" content="MSSQL迁移至Amazon RDS">
+<meta property="og:url" content="http://yoursite.com/2017/05/25/Restoring-a-SQLServer-backup-to-Amazon-RDS/index.html">
 <meta property="og:site_name" content="三棵树  ◢ ◤">
-<meta property="og:description" content="人，似乎真的是越缺少什么，就越在乎什么。
-我曾经以为，自己能遗世独立，看破这种凡尘破事，世人皆醉我独醒，然而却不自觉的发现自己竟然也是其中的一份子。越缺少什么，就越想证明自己可以拥有。以自欺欺人的心态，我也可以拥有，只是我现在还不想、用不上等等。与人交谈时，放松心态，越是轻松自然，就越能对答如流，行云流水。
+<meta property="og:description" content="将MSSQL迁移到亚马逊RDS，步骤以下。
 
-腰有十文必振衣作响每与人言必谈贵戚遇美人必急索登床见问路之人必作傲睨之态与朋友聚喋喋高吟">
-<meta property="og:updated_time" content="2017-05-21T16:03:26.000Z">
+
+备份MSSQL数据库到bak文件
+创建S3数据桶，并上传bak文件
+RDS创建选项组
+创建RDS实例
+连接RDS并还原
+
+
+创建S3数据桶
+
+RDS创建选项组
+
+选项选择 SQLSERVER_BACKUP_RESTORE ，IAM角色如果之前已创建，可以使用。否则选择创建新角色，S3数据桶选择第一步创建的那个数据桶。
+
+创建RDS实例我这里选择的是M">
+<meta property="og:image" content="http://yoursite.com/images/rds/create_s3_buckets.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/s3_bucket_upload.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/rds_create_option_group.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/rds_option_group_add_option.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/rds_option_group_add_option2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/rds_select_engine.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/rds_create_db_info.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/rds_waiting_create.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/restore_db.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/rds_task_status.jpg">
+<meta property="og:image" content="http://yoursite.com/images/rds/rds_task_status_success.jpg">
+<meta property="og:updated_time" content="2017-05-26T06:48:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="20170521">
-<meta name="twitter:description" content="人，似乎真的是越缺少什么，就越在乎什么。
-我曾经以为，自己能遗世独立，看破这种凡尘破事，世人皆醉我独醒，然而却不自觉的发现自己竟然也是其中的一份子。越缺少什么，就越想证明自己可以拥有。以自欺欺人的心态，我也可以拥有，只是我现在还不想、用不上等等。与人交谈时，放松心态，越是轻松自然，就越能对答如流，行云流水。
+<meta name="twitter:title" content="MSSQL迁移至Amazon RDS">
+<meta name="twitter:description" content="将MSSQL迁移到亚马逊RDS，步骤以下。
 
-腰有十文必振衣作响每与人言必谈贵戚遇美人必急索登床见问路之人必作傲睨之态与朋友聚喋喋高吟">
+
+备份MSSQL数据库到bak文件
+创建S3数据桶，并上传bak文件
+RDS创建选项组
+创建RDS实例
+连接RDS并还原
+
+
+创建S3数据桶
+
+RDS创建选项组
+
+选项选择 SQLSERVER_BACKUP_RESTORE ，IAM角色如果之前已创建，可以使用。否则选择创建新角色，S3数据桶选择第一步创建的那个数据桶。
+
+创建RDS实例我这里选择的是M">
+<meta name="twitter:image" content="http://yoursite.com/images/rds/create_s3_buckets.jpg">
 
 
 
@@ -137,13 +188,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/21/20170521/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/25/Restoring-a-SQLServer-backup-to-Amazon-RDS/"/>
 
 
 
 
 
-  <title> 20170521 | 三棵树  ◢ ◤ </title>
+  <title> MSSQL迁移至Amazon RDS | 三棵树  ◢ ◤ </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -280,7 +331,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/21/20170521/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/25/Restoring-a-SQLServer-backup-to-Amazon-RDS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kinsen.Chan">
@@ -301,7 +352,7 @@
             
             
               
-                20170521
+                MSSQL迁移至Amazon RDS
               
             
           </h1>
@@ -316,8 +367,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-21T23:49:26+08:00">
-                2017-05-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-25T14:49:58+08:00">
+                2017-05-25
               </time>
             
 
@@ -339,8 +390,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
+                  <a href="/categories/数据库管理/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库管理</span>
                   </a>
                 </span>
 
@@ -357,9 +408,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/05/21/20170521/#comments" itemprop="discussionUrl">
+                <a href="/2017/05/25/Restoring-a-SQLServer-backup-to-Amazon-RDS/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/05/21/20170521/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/05/25/Restoring-a-SQLServer-backup-to-Amazon-RDS/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -385,12 +436,35 @@
       
 
       
-        <p><strong>人，似乎真的是越缺少什么，就越在乎什么。</strong></p>
-<p>我曾经以为，自己能遗世独立，看破这种凡尘破事，世人皆醉我独醒，然而却不自觉的发现自己竟然也是其中的一份子。<br>越缺少什么，就越想证明自己可以拥有。以自欺欺人的心态，我也可以拥有，只是我现在还不想、用不上等等。<br>与人交谈时，放松心态，越是轻松自然，就越能对答如流，行云流水。</p>
+        <p>将MSSQL迁移到亚马逊RDS，步骤以下。</p>
 <blockquote>
-<p>腰有十文必振衣作响<br>每与人言必谈贵戚<br>遇美人必急索登床<br>见问路之人必作傲睨之态<br>与朋友聚喋喋高吟其酸腐诗文<br>头已花白却喜唱艳曲<br>施人一小惠广布于众<br>与人交谈借刁言以逞才<br>借人之债时其脸如丐<br>被人索偿时其态如王<br>见人常多蜜语而背地却常揭人短处</p>
+<ol>
+<li>备份MSSQL数据库到bak文件</li>
+<li>创建S3数据桶，并上传bak文件</li>
+<li>RDS创建选项组</li>
+<li>创建RDS实例</li>
+<li>连接RDS并还原</li>
+</ol>
 </blockquote>
-<p>腰有十文，欲振衣作响。改！<br>每与人言必谈“近朋”奢习。改！<br>多似长舌妇怨言牢骚，不思解决方法。改！</p>
+<h3 id="创建S3数据桶"><a href="#创建S3数据桶" class="headerlink" title="创建S3数据桶"></a>创建S3数据桶</h3><p><img src="/images/rds/create_s3_buckets.jpg" alt="创建S3数据桶"></p>
+<p><img src="/images/rds/s3_bucket_upload.jpg" alt="上传bak文件到数据桶"></p>
+<h3 id="RDS创建选项组"><a href="#RDS创建选项组" class="headerlink" title="RDS创建选项组"></a>RDS创建选项组</h3><p><img src="/images/rds/rds_create_option_group.jpg" alt="创建RDS选项组"></p>
+<p><img src="/images/rds/rds_option_group_add_option.jpg" alt="RDS选项组添加选项"></p>
+<p>选项选择 <strong>SQLSERVER_BACKUP_RESTORE</strong> ，IAM角色如果之前已创建，可以使用。否则选择创建新角色，S3数据桶选择第一步创建的那个数据桶。</p>
+<p><img src="/images/rds/rds_option_group_add_option2.jpg" alt="RDS选项组添加选项2"></p>
+<h3 id="创建RDS实例"><a href="#创建RDS实例" class="headerlink" title="创建RDS实例"></a>创建RDS实例</h3><p>我这里选择的是MSSQL SE，如果只是用到SQL基础功能，Express已经够用了。<br><img src="/images/rds/rds_select_engine.jpg" alt="选择数据库引擎"></p>
+<p>填写数据库选项信息，可以修改端口，这里的选项组选择刚才我们创建的那一个。<br><img src="/images/rds/rds_create_db_info.jpg" alt="指定数据库详细信息"></p>
+<p>一路下一步，直到等待创建这一步。<br><img src="/images/rds/rds_waiting_create.jpg" alt="等待创建成功"></p>
+<h3 id="连接RDS并还原"><a href="#连接RDS并还原" class="headerlink" title="连接RDS并还原"></a>连接RDS并还原</h3><p>数据库实例创建成功后便可以通过客户端连上去，需要注意的是如果自己配了VPC，且没有分配公网IP，那就需要做一次NAT转发端口，我用了一台Ubuntu做NAT转发。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</div><div class="line">iptables -t nat -A PREROUTING -i eth0 -p tcp -m tcp --dport xxx -j DNAT --to-destination mssql_rds_ip:port</div><div class="line">iptables -t nat -A POSTROUTING -j MASQUERADE</div><div class="line">iptables-save &gt; /etc/iptables-rules</div><div class="line">ip6tables-save &gt; /etc/ip6tables-rules</div></pre></td></tr></table></figure>
+<p>连上服务器并进行数据库还原，使用语句:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">exec msdb.dbo.rds_restore_database </div><div class="line">    @restore_db_name='database_name', </div><div class="line">    @s3_arn_to_restore_from='arn:aws:s3:::bucket_name/file_name_and_extension';</div></pre></td></tr></table></figure>
+<p><img src="/images/rds/restore_db.jpg" alt="还原数据库"></p>
+<p>可以使用 <strong>exec msdb.dbo.rds_task_status @db_name=’database_name’</strong> 来查看当前的状态。</p>
+<p><img src="/images/rds/rds_task_status.jpg" alt="查询状态"></p>
+<p>还原成功</p>
+<p><img src="/images/rds/rds_task_status_success.jpg" alt="还原成功"></p>
+<p>到此迁移就已经完成。</p>
 
       
     </div>
@@ -420,7 +494,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/人生/" rel="tag"># 人生</a>
+            <a href="/tags/MSSQL/" rel="tag"># MSSQL</a>
+          
+            <a href="/tags/RDS/" rel="tag"># RDS</a>
           
         </div>
       
@@ -433,8 +509,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/18/essentialism-reading-notes/" rel="next" title="精要主义读书笔记">
-                <i class="fa fa-chevron-left"></i> 精要主义读书笔记
+              <a href="/2017/05/21/20170521/" rel="next" title="20170521">
+                <i class="fa fa-chevron-left"></i> 20170521
               </a>
             
           </div>
@@ -442,10 +518,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/25/Restoring-a-SQLServer-backup-to-Amazon-RDS/" rel="prev" title="MSSQL迁移至Amazon RDS">
-                MSSQL迁移至Amazon RDS <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -499,8 +571,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -562,6 +643,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建S3数据桶"><span class="nav-number">1.</span> <span class="nav-text">创建S3数据桶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDS创建选项组"><span class="nav-number">2.</span> <span class="nav-text">RDS创建选项组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建RDS实例"><span class="nav-number">3.</span> <span class="nav-text">创建RDS实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接RDS并还原"><span class="nav-number">4.</span> <span class="nav-text">连接RDS并还原</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -682,9 +779,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2017/05/21/20170521/';
-          this.page.identifier = '2017/05/21/20170521/';
-          this.page.title = '20170521';
+          this.page.url = 'http://yoursite.com/2017/05/25/Restoring-a-SQLServer-backup-to-Amazon-RDS/';
+          this.page.identifier = '2017/05/25/Restoring-a-SQLServer-backup-to-Amazon-RDS/';
+          this.page.title = 'MSSQL迁移至Amazon RDS';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://kinsen-1.disqus.com/embed.js';
